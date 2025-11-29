@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Skinport Service
+  items-service:
+    build: 
+      context: ./skinport-service
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - UPDATE_INTERVAL_MIN=5
+      - PORT=7777
+    depends_on:
+      - redis
+    restart: always
+
+  # Store Service
+  store-service:
+    build: 
+      context: ./store-service
+      dockerfile: Dockerfile
+    ports:
+      - "7778:7778"
+    environment:
+      - PORT=7778
+      - DATABASE_URL=postgresql://store_user:store_password@postgres:5432/store_db
+      - ITEMS_SERVICE_URL=http://items-service:7777
+    depends_on:
+      - postgres
+      - items-service
+    restart: always
+
+  # Redis
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always
+
+  # PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: store_user
+      POSTGRES_PASSWORD: store_password
+      POSTGRES_DB: store_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  postgres_data:
