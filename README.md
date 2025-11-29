@@ -77,3 +77,6 @@
     ]}
   ```
 - `GET /health` - Проверка здоровья сервиса
+
+## Схема базы
+<img src="https://raw.githubusercontent.com/true-goniss/items-store/refs/heads/main/items-store-db.png" width=65% height=45%>
