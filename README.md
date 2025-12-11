@@ -14,8 +14,8 @@
 ## Архитектура (Микросервисы)
 ### Items Service (skinport-service):
 
-- Получает и кэширует цены CS:GO скинков из Skinport API
-- Предоставляет REST API для данных о скинках с кэшированием в Redis
+- Получает и кэширует цены CS:GO скинов из Skinport API
+- Предоставляет REST API для данных о скинах с кэшированием в Redis
 - Фоновое обновление цен с настраиваемыми интервалами
 
 ### Store Service (store-service):
@@ -82,3 +82,5 @@
 
 ## Схема базы
 <img src="https://raw.githubusercontent.com/true-goniss/items-store/refs/heads/main/items-store-db.png" width=65% height=45%>
+
+a tesk task i made in vain
